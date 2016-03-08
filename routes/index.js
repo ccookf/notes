@@ -22,19 +22,18 @@ var store = new MongoDBStore(
 passport.use(new LocalStrategy(
     function(username, password, done)
     {
-        var doc = db.collection('users').find({ username: username }).toArray(
-        
-            function(err, data)
+        db.collection('users').find({ username: username }).toArray(function(err, data)
+        {
+            if (err) return done(null, false);
+            else if (data.length == 0) return done(null, false);
+            else if (password != data[0].password) return done(null, false);
+            else
             {
-                if (err) return done(null, false);
-                else if (password != data[0].password) return done(null, false);
-                else
-                {
-                    console.log(data[0]);
-                    var user = { username: username, id: data[0]._id };
-                    return done(null, user);
-                } 
-            });
+                console.log(data[0]);
+                var user = { username: username, id: data[0]._id };
+                return done(null, user);
+            } 
+        });
     }
 ));
 
@@ -49,6 +48,13 @@ passport.deserializeUser(function(user, callback)
     callback(null, user);
 });
 
+//Middleware to check authentication
+var isAuthenticated = function(req, res, next) 
+{
+    if (req.isAuthenticated()) return next();
+    res.redirect('/');
+}
+
 /* GET home page. */
 router.get('/', function(req, res, next) 
 {
@@ -62,6 +68,11 @@ router.get('/', function(req, res, next)
         name = 'to the site';
     }
     res.render('index', { title: 'Notes', name: name });
+});
+
+router.get('/data', isAuthenticated, function(req, res)
+{
+    res.status(200).send('Here is data beep boop beep.');
 });
 
 router.get('/login', function(req, res)
