@@ -1,6 +1,13 @@
 var express = require('express');
 var router = express.Router();
 
+var mongo = require('mongoclientsingle');
+var db;
+mongo.db(function(database)
+{
+    db = database;
+});
+
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var session = require('express-session');
@@ -11,16 +18,23 @@ var store = new MongoDBStore(
     collection: 'sessions'
 });
 
+//Naive login, searches for the user and checks cleartext password against form data
 passport.use(new LocalStrategy(
     function(username, password, done)
     {
-        //Placeholder for db search and password verification
-        var user = 
-        {
-            username: username,
-        };
+        var doc = db.collection('users').find({ username: username }).toArray(
         
-        return done(null, user);
+            function(err, data)
+            {
+                if (err) return done(null, false);
+                else if (password != data[0].password) return done(null, false);
+                else
+                {
+                    console.log(data[0]);
+                    var user = { username: username, id: data[0]._id };
+                    return done(null, user);
+                } 
+            });
     }
 ));
 
