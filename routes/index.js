@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-var mongo = require('mongoclientsingle');
+var mongo = require('../mongoclientsingle');
 var db;
 mongo.db(function(database)
 {
