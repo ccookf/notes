@@ -88,7 +88,7 @@ router.post('/add', isAuthenticated, function(req, res)
                 console.error("/routes/notes.js error in request '/notes/add': " + err);
                 data.status(500).send('Database error.');
             }
-            else res.status(201).sendFile(static + '/notes.html');
+            else res.status(201).redirect('/notes');
         });
     }
     //If this happens double check the form submission and express body parsing
