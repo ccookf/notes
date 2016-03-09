@@ -1,5 +1,5 @@
 # Notes
-A simple expressjs site to take notes.  Built on Node, Express, Bootstrap, and running on AWS [here](http://ec2-54-174-245-235.compute-1.amazonaws.com/).
+A simple expressjs site to take notes.  Built on Node, Express, Bootstrap, Angular, and running on AWS [here](http://ec2-54-174-245-235.compute-1.amazonaws.com/).
 
 ##### Todo
 - ~~Settle on note design, probably date -> memo~~.
