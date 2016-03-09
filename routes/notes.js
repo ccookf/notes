@@ -13,6 +13,7 @@
 var express = require('express');
 var router = express.Router();
 
+var mongodb = require('mongodb');
 var mongo = require('mongoclientsingle');
 var db;
 mongo.db(function(database)
@@ -96,6 +97,23 @@ router.post('/add', isAuthenticated, function(req, res)
     {
         console.error("/routes/notes.js error in request '/notes/add': " + e);
         res.status(500).send('Check form formatting.');
+    }
+});
+
+/**
+ * Method to delete a note from a provided note object's _id
+ */
+router.post('/delete', isAuthenticated, function(req, res)
+{
+    var id = req.body._id;
+    if (id == null) res.status(400).send('Invalid request.');
+    else
+    {
+        db.collection('notes').remove({_id: new mongodb.ObjectID(id)}, function(err, data)
+        {
+           if (err) res.status(500).send('DB error.');
+           else res.status(200).redirect('/notes'); 
+        });
     }
 });
 

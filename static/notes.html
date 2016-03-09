@@ -25,8 +25,11 @@
             <form class='form-horizontal'>
             <div class='getNotes' ng-repeat='note in notes'>
                 <div class='form-group'>
-                    <label class='col-xs-offset-2 col-xs-1 control-label'>{{note.date | date : 'MMM d h:mma'}}</label>
+                    <label class='col-xs-3 control-label'>{{note.date | date : 'MMM d h:mma'}}</label>
                     <p class='col-xs-7'>{{note.note}}</p>
+                    <div class='col-xs-2'>
+                        <button class='btn btn-default' type='button' data-ng-click='delete(note)'>Delete</button>
+                    </div>
                 </div>
             </div>
             </form>
@@ -38,7 +41,7 @@
             <div class='form-group'>
                 <label for='note' class='col-xs-2 control-label'>New note:</label>
                 <div class='col-xs-8'>
-                    <textarea class='form-control' rows='3' name='note' placeholder='Something to remember...'></textarea>
+                    <textarea class='form-control' name='note' placeholder='Something to remember...'></textarea>
                 </div>
             </div>
             <div class='col-xs-offset-2 col-xs-8'>
