@@ -58,6 +58,7 @@ var isAuthenticated = function(req, res, next)
 /* GET home page. */
 router.get('/', function(req, res, next) 
 {
+    if (req.isAuthenticated()) res.redirect('/notes');
     var name;
     try
     {
@@ -77,7 +78,7 @@ router.get('/data', isAuthenticated, function(req, res)
 
 router.get('/login', function(req, res)
 {
-    res.render('login');
+    res.redirect('/login.html');
 });
 
 router.get('/logout', function(req, res)
