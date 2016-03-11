@@ -24,7 +24,7 @@
         <div ng-controller="notesController">
             <form class='form-horizontal'>
             <div class='getNotes' ng-repeat='note in notes'>
-                <div class='form-group'>
+                <div class='form-group' id='{{note._id}}'>
                     <label class='col-xs-3 control-label'>{{note.date | date : 'MMM d h:mma'}}</label>
                     <p class='col-xs-7'>{{note.note}}</p>
                     <div class='col-xs-2'>
