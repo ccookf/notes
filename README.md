@@ -4,6 +4,9 @@ A simple expressjs site to take notes.  Built on Node, Express, Bootstrap, Angul
 ### Installation
 Open a command line to the repository and run `npm install` for dependencies.  Then run the server with `node bin/www` or using your process manager of choice.  Acess through the express default port (ie. [http://localhost:3000](http://localhost:3000)).
 
+### License
+In the strange situation anyone actually wants to use this, MIT.  Have fun?
+
 ---
 
 ##### Todo
