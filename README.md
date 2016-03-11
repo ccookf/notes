@@ -7,7 +7,7 @@ A simple expressjs site to take notes.  Built on Node, Express, Bootstrap, Angul
 - ~~Have a user page display notes.~~
 - ~~(Preferably on same page)~~ ~~have a form for submitting a new note.~~
 - ~~Easy delete notes.~~
-- Have notes clear from view when deleted.
+- ~~Have notes clear from view when deleted.~~
 - Fix navigation.
 
 ##### Stretch goals
