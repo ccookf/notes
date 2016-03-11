@@ -1,6 +1,11 @@
 # Notes
 A simple expressjs site to take notes.  Built on Node, Express, Bootstrap, Angular, and running on AWS [here](http://ec2-54-174-245-235.compute-1.amazonaws.com/).
 
+### Installation
+Open a command line to the repository and run `npm install` for dependencies.  Then run the server with `node bin/www` or using your process manager of choice.  Acess through the express default port (ie. [http://localhost:3000](http://localhost:3000)).
+
+---
+
 ##### Todo
 - ~~Settle on note design, probably date -> memo~~.
 - ~~Store notes per user in a collection~~.
@@ -13,5 +18,6 @@ A simple expressjs site to take notes.  Built on Node, Express, Bootstrap, Angul
 ##### Stretch goals
 - Remove the last jade pages.
 - Unify the page designs and add a navbar.
+- Welcome/home page.
 - Registration page.
 - Password security.
