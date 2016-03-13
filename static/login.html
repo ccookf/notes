@@ -13,34 +13,46 @@
         <link href='css/bootstrap.min.css' rel='stylesheet'>
         <link href='css/login.css' rel='stylesheet'>
         
+        <script src='js/angular.min.js'></script>
     </head>
-    <body>
+    <body ng-app='login'>
         <h1 class='text-center'>Login</h1>
-        <form class='form-horizontal' method='POST' action='/login'>
+        
+        <div ng-controller="loginController">
+        <form class='form-horizontal'>
+            <div class='form-group ng-show' ng-show='isBadLogin'>
+                <div class='alert alert-danger fade in text-center' role='alert'>
+                    Incorrect username and/or password.
+                </div>
+            </div>
             <div class='form-group'>
                 <label for='username' class='col-xs-2 control-label'>Username</label>
                 <div class='col-xs-8'>
-                    <input type='username' class='form-control' name='username' placeholder='Username'>
+                    <input type='username' class='form-control' ng-model='username'>
                 </div>
             </div>
             <div class='form-group'>
                 <label for='password' class='col-xs-2 control-label'>Password</label>
                 <div class='col-xs-8'>
-                    <input type='password' class='form-control' name='password' placeholder='Password'>
+                    <input type='password' class='form-control' ng-model='password'>
                 </div>
             </div>
             <div class='col-xs-offset-2'>
                 <div class='col-xs-2'>
-                    <button class='btn btn-primary btn-lg btn-block' type='submit'>Submit</button>
+                    <button class='btn btn-primary btn-lg btn-block' type='submit' data-ng-click='login()'>Submit</button>
                 </div>
                 <div class='col-xs-2'>
                     <a class='btn btn-default btn-lg btn-block' href='/' role='button'>Cancel</a>
                 </div>
+            </div>
             </div>
          </form>
     
         <!-- need this for bootstraps javascript -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
         <script src='js/bootstrap.min.js'></script>
+        
+        <script src='js/login.js'></script>
+        <script src='js/controllers/loginController.js'></script>
     </body>
 </html>

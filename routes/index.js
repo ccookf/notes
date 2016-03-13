@@ -19,8 +19,8 @@ var store = new MongoDBStore(
 });
 
 //Naive login, searches for the user and checks cleartext password against form data
-passport.use(new LocalStrategy(
-    function(username, password, done)
+passport.use(new LocalStrategy({passReqToCallback: true},
+    function(req, username, password, done)
     {
         db.collection('users').find({ username: username }).toArray(function(err, data)
         {
@@ -31,7 +31,11 @@ passport.use(new LocalStrategy(
             {
                 console.log(data[0]);
                 var user = { username: username, id: data[0]._id };
-                return done(null, user);
+                req.session.regenerate(function(err)
+                {
+                    if (err) console.log(err);
+                    return done(null, user);
+                });
             } 
         });
     }
@@ -90,9 +94,9 @@ router.get('/logout', function(req, res)
     });
 });
 
-router.post('/login', passport.authenticate('local', {failureRedirect: '/login.html'}), function(req, res)
+router.post('/login', passport.authenticate('local'),function(req, res)
 {
-    res.redirect('/notes'); 
+    res.status(200).redirect('/notes');
 });
 
 module.exports = router;

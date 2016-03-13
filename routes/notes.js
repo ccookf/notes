@@ -30,6 +30,7 @@ var static = root + '/static';
 var isAuthenticated = function(req, res, next) 
 {
     if (req.isAuthenticated()) return next();
+    console.log('User is not authenticated, sending to login.');
     res.redirect('/login.html');
 }
 
