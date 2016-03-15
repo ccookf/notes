@@ -22,6 +22,6 @@ In the strange situation anyone actually wants to use this, MIT.  Have fun?
 - Remove the last jade pages.
 - ~~Unify the page designs and add a navbar.~~
 - ~~Welcome/home page.~~
-- Registration page.
+- ~~Registration page.~~
 - Password security.
 - Dynamic login/logout button that shows username.
