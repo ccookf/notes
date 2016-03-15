@@ -18,9 +18,9 @@ var store = new MongoDBStore(
     collection: 'sessions'
 });
 
+var bcrypt = require('bcrypt');
 
-
-//Naive login, searches for the user and checks cleartext password against form data
+//Searches for matching username
 passport.use(new LocalStrategy({passReqToCallback: true},
     function(req, username, password, done)
     {
@@ -28,17 +28,25 @@ passport.use(new LocalStrategy({passReqToCallback: true},
         {
             if (err) return done(null, false);
             else if (data.length == 0) return done(null, false);
-            else if (password != data[0].password) return done(null, false);
             else
             {
-                console.log(data[0]);
-                var user = { username: username, id: data[0]._id };
-                req.session.regenerate(function(err)
+                //Compare supplied password against hashed password of first matching user
+                bcrypt.compare(password, data[0].password, function(err, res)
                 {
-                    if (err) console.log(err);
-                    return done(null, user);
+                    if (err || res == false) return done(null, false);
+                    else
+                    {
+                        //Matching password!  Store user data and pass to serialization(?)
+                        console.log(data[0]);
+                        var user = { username: username, id: data[0]._id };
+                        req.session.regenerate(function(err)
+                        {
+                            if (err) console.log(err);
+                            return done(null, user);
+                        });
+                    }
                 });
-            } 
+            }
         });
     }
 ));
@@ -98,17 +106,34 @@ router.post('/register', function(req, res)
     {
         db.collection('users').find({ username: req.body.username }).toArray(function(err, data)
         {
+            //If username is not taken register the new user with the supplied data
             if (data.length > 0) res.status(400).send('Username is already taken.');
             else
             {
-                db.collection('users').insert({ username: req.body.username, password: req.body.password }, function(err, data)
-                {
-                    if (err) res.status(400).send('DB error.');
-                    else res.status(201).redirect('/notes');
-                });
+                RegisterUser(req.body.username, req.body.password, res);
             }
         });
     }
 });
 
 module.exports = router;
+
+/**
+ * Registers a new user in the database using bcrypt's async functions
+ * I'm really confused on how salts are managed.  Something to research later
+ */
+var RegisterUser = function(username, password, res)
+{
+    bcrypt.genSalt(function(err, salt)
+    {
+        if (err) res.status(400).send(err);
+        else bcrypt.hash(password, salt, function(err, hash)
+        {
+            db.collection('users').insert({ username: username, password: hash }, function(err, data)
+            {
+                if (err) res.status(400).send('DB error.');
+                else res.status(201).redirect('/notes');
+            });
+        });
+    });
+};
