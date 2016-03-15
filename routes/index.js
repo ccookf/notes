@@ -63,16 +63,7 @@ var isAuthenticated = function(req, res, next)
 router.get('/', function(req, res, next) 
 {
     if (req.isAuthenticated()) res.redirect('/notes');
-    var name;
-    try
-    {
-        name = req.user.username;
-    }
-    catch (e)
-    {
-        name = 'to the site';
-    }
-    res.render('index', { title: 'Notes', name: name });
+    res.redirect('/home.html');
 });
 
 router.get('/data', isAuthenticated, function(req, res)

@@ -16,11 +16,11 @@ In the strange situation anyone actually wants to use this, MIT.  Have fun?
 - ~~(Preferably on same page)~~ ~~have a form for submitting a new note.~~
 - ~~Easy delete notes.~~
 - ~~Have notes clear from view when deleted.~~
-- Fix navigation.
+- ~~Fix navigation.~~
 
 ##### Stretch goals
 - Remove the last jade pages.
-- Unify the page designs and add a navbar.
-- Welcome/home page.
+- ~~Unify the page designs and add a navbar.~~
+- ~~Welcome/home page.~~
 - Registration page.
 - Password security.
