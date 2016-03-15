@@ -26,7 +26,7 @@ function($scope, $http, $window, $timeout)
         
         $http.post('/register', body).then(function successCallback(res)
         {
-            $window.location.href = '/notes.html';
+            $window.location.href = '/login.html';
         }, function errorCallback(res)
         {
             $scope.usernameIsTaken = true;

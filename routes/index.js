@@ -110,7 +110,7 @@ router.post('/register', function(req, res)
             if (data.length > 0) res.status(400).send('Username is already taken.');
             else
             {
-                RegisterUser(req.body.username, req.body.password, res);
+                RegisterUser(req.body.username, req.body.password, req, res);
             }
         });
     }
@@ -122,7 +122,7 @@ module.exports = router;
  * Registers a new user in the database using bcrypt's async functions
  * I'm really confused on how salts are managed.  Something to research later
  */
-var RegisterUser = function(username, password, res)
+var RegisterUser = function(username, password, req, res)
 {
     bcrypt.genSalt(function(err, salt)
     {
@@ -132,7 +132,13 @@ var RegisterUser = function(username, password, res)
             db.collection('users').insert({ username: username, password: hash }, function(err, data)
             {
                 if (err) res.status(400).send('DB error.');
-                else res.status(201).redirect('/notes');
+                else 
+                {
+                    req.session.destroy(function(err)
+                    {  
+                        res.status(201).redirect('/login.html');
+                    });
+                }
             });
         });
     });
