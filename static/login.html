@@ -26,6 +26,11 @@
                     Incorrect username and/or password.
                 </div>
             </div>
+            <div class='form-group ng-show' ng-show='usernameIsTaken'>
+                <div class='alert alert-danger fade in text-center' role='alert'>
+                    Username is taken.
+                </div>
+            </div>
             <div class='form-group'>
                 <label for='username' class='col-xs-2 control-label'>Username</label>
                 <div class='col-xs-8'>
@@ -41,6 +46,9 @@
             <div class='col-xs-offset-2'>
                 <div class='col-xs-2'>
                     <button class='btn btn-primary btn-lg btn-block' type='submit' data-ng-click='login()'>Submit</button>
+                </div>
+                <div class='col-xs-2'>
+                    <button class='btn btn-primary btn-lg btn-block' type='button' data-ng-click='register()'>Register</button>
                 </div>
                 <div class='col-xs-2'>
                     <a class='btn btn-default btn-lg btn-block' href='/' role='button'>Cancel</a>

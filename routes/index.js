@@ -18,6 +18,8 @@ var store = new MongoDBStore(
     collection: 'sessions'
 });
 
+
+
 //Naive login, searches for the user and checks cleartext password against form data
 passport.use(new LocalStrategy({passReqToCallback: true},
     function(req, username, password, done)
@@ -66,11 +68,6 @@ router.get('/', function(req, res, next)
     res.redirect('/home.html');
 });
 
-router.get('/data', isAuthenticated, function(req, res)
-{
-    res.status(200).send('Here is data beep boop beep.');
-});
-
 router.get('/login', function(req, res)
 {
     res.redirect('/login.html');
@@ -88,6 +85,30 @@ router.get('/logout', function(req, res)
 router.post('/login', passport.authenticate('local'),function(req, res)
 {
     res.status(200).redirect('/notes');
+});
+
+router.post('/register', function(req, res)
+{
+    if (req.body.username == null || req.body.password == null)
+    {
+        console.log('null registration fields');
+        res.status(400).end();
+    }
+    else
+    {
+        db.collection('users').find({ username: req.body.username }).toArray(function(err, data)
+        {
+            if (data.length > 0) res.status(400).send('Username is already taken.');
+            else
+            {
+                db.collection('users').insert({ username: req.body.username, password: req.body.password }, function(err, data)
+                {
+                    if (err) res.status(400).send('DB error.');
+                    else res.status(201).redirect('/notes');
+                });
+            }
+        });
+    }
 });
 
 module.exports = router;
