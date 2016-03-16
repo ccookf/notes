@@ -24,9 +24,10 @@
                     </ul>
                 </li>
             </ul>
-            <ul class='nav navbar-nav navbar-right'>
-                <li><a href='/login'>Login</a></li>
-                <li><a href='/logout'>Logout</a></li>
+            <ul class='nav navbar-nav navbar-right' ng-controller='userController'>
+                <li ng-if='!username'><a href='/login'>Login</a></li>
+                <li ng-if='username'><a href='#'>{{username}}</a></li>
+                <li ng-if='username'><a href='/logout'>Logout</a></li>
             </ul>
         </div>
     </div>

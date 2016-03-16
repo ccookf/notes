@@ -86,7 +86,7 @@ router.get('/logout', function(req, res)
     req.session.destroy(function(err)
     {
         console.error('Failed to destroy session: %s', err);
-        res.redirect('/');
+        res.redirect('/logout.html');
     });
 });
 

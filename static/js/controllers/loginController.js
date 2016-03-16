@@ -12,6 +12,7 @@ function($scope, $http, $window, $timeout)
         
         $http.post('/login', body).then(function successCallback(res)
         {
+            window.localStorage.setItem('username', body.username);
             $window.location.href = '/notes.html';
         }, function errorCallback(res)
         {

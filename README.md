@@ -24,5 +24,5 @@ In the strange situation anyone actually wants to use this, MIT.  Have fun?
 - ~~Welcome/home page.~~
 - ~~Registration page.~~
 - ~~Password security.~~
-- Dynamic login/logout button that shows username.
+- ~~Dynamic login/logout button that shows username.~~
 - Make a basic CMS for admin control.
