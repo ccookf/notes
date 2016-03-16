@@ -72,7 +72,6 @@ var isAuthenticated = function(req, res, next)
 /* GET home page. */
 router.get('/', function(req, res, next) 
 {
-    if (req.isAuthenticated()) res.redirect('/notes');
     res.redirect('/home.html');
 });
 
