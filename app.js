@@ -62,6 +62,7 @@ app.use(function(req, res, next) {
 if (app.get('env') === 'development') {
   app.use(function(err, req, res, next) {
     res.status(err.status || 500);
+    
     res.render('error', {
       message: err.message,
       error: err
@@ -73,10 +74,15 @@ if (app.get('env') === 'development') {
 // no stacktraces leaked to user
 app.use(function(err, req, res, next) {
   res.status(err.status || 500);
-  res.render('error', {
+  
+  if (err.status == 404) res.status(404).sendFile(__dirname + '/static/404.html');
+  else res.status(500).sendFile(__dirname + '/static/error.html');
+  
+  //Auto generated error handler
+  /* res.render('error', {
     message: err.message,
     error: {}
-  });
+  }); */ 
 });
 
 

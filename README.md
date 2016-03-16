@@ -19,7 +19,7 @@ In the strange situation anyone actually wants to use this, MIT.  Have fun?
 - ~~Fix navigation.~~
 
 ##### Stretch goals
-- Remove the last jade pages.
+- ~~Remove the last public facing jade pages.~~
 - ~~Unify the page designs and add a navbar.~~
 - ~~Welcome/home page.~~
 - ~~Registration page.~~
