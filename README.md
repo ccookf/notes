@@ -1,5 +1,5 @@
 # Notes
-A simple expressjs site to take notes.  Built on Node, Express, Bootstrap, Angular, and running on AWS [here](http://52.200.8.223).
+A simple expressjs site to take notes.  Built on Node, Express, Bootstrap, Angular, and running on AWS [here](http://ccookf.com).
 
 ### Installation
 Open a command line to the repository and run `npm install` for dependencies.  Then run the server with `node bin/www` or using your process manager of choice.  Acess through the express default port (ie. [http://localhost:3000](http://localhost:3000)).
