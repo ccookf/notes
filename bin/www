@@ -17,8 +17,8 @@ var https = require('https');
  */
 
 var port;
-if (process.env.NODE_ENV == 'production') port = normalizePort(process.env.PORT || '8000');
-else port = normalizePort(process.env.PORT || 443);
+if (process.env.NODE_ENV == 'production') port = 8000;
+else port = 443;
 app.set('port', port);
 
 //HTTP server port & traffic redirect to https server which houses the actual app
