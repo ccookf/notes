@@ -37,7 +37,7 @@ app.use(session({
     resave: true,
     saveUnitialized: false,
     secret: 'NoteToSelfGetAProperSecretGeneratorInHereLater', //Kind of pointless on a public repo
-    cookie: { httpOnly: true, secure: false, maxAge: hour },  //Will not use https on this project
+    cookie: { httpOnly: true, secure: true, maxAge: hour },
     store: store,
     rolling: true
 }));

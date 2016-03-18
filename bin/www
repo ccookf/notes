@@ -4,7 +4,9 @@
  * Module dependencies.
  */
 
+var express = require('express');
 var app = require('../app');
+var httpApp = express();
 var debug = require('debug')('notes:server');
 var fs = require('fs');
 var http = require('http');
@@ -14,15 +16,25 @@ var https = require('https');
  * Get port from environment and store in Express.
  */
 
-var port = normalizePort(process.env.PORT || '3000');
+var port;
+if (process.env.NODE_ENV == 'production') port = normalizePort(process.env.PORT || '8000');
+else port = normalizePort(process.env.PORT || 443);
 app.set('port', port);
 
+//HTTP server port & traffic redirect to https server which houses the actual app
+httpApp.set('port', 3000);
+httpApp.get('*', function(req, res, next)
+{
+    console.log('http request for %s %s', req.hostname, req.path);
+    res.redirect("https://" + req.hostname + req.path);
+});
+
 /**
- * Create HTTP server.
+ * Create the node server
  */
 
 //for http server
-var server = http.createServer(app);
+var http_server = http.createServer(httpApp).listen(httpApp.get('port'));
 
 //for https server, I'm really not sure what the deal with the certificates I was given are
 var server = https.createServer({
