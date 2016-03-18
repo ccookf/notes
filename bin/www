@@ -16,9 +16,9 @@ var https = require('https');
  * Get port from environment and store in Express.
  */
 
-var port = 8000;
-//if (process.env.NODE_ENV == 'production') port = 8000;
-//else port = 443;
+var port;
+if (process.env.NODE_ENV == 'production') port = 8000;
+else port = 443;
 app.set('port', port);
 
 //HTTP server port & traffic redirect to https server which houses the actual app

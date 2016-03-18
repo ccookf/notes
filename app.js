@@ -44,11 +44,11 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.get('*', function(req, res, next)
-{
-    console.log('HTTPS request.');
-    next();
-});
+// app.get('*', function(req, res, next)
+// {
+//     console.log('HTTPS request.');
+//     next();
+// });
 
 app.use('/', routes);
 app.use('/notes', notes);
